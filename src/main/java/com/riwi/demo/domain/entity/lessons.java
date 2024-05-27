@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class lessons {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String lesson_id;
     @Column (length = 100)
     private String lesson_title;
     private String content;
