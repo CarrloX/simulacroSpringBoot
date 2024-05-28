@@ -31,6 +31,7 @@ public class users {
     private String email;
     @Column(length = 100,nullable = false)
     private String full_name;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 }
