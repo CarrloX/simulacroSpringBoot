@@ -1,6 +1,5 @@
 package com.riwi.demo.domain.entity;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 
 import jakarta.persistence.Entity;
@@ -9,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.DecimalMax;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,7 +25,8 @@ public class submissions {
     private String submission_id;
     private String content;
     private Date submission_date;
-    private BigDecimal grade;
+    @DecimalMax("5,2")
+    private double grade;
 
     @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName = "user_id")

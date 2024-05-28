@@ -22,7 +22,7 @@ public class lessons {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String lesson_id;
-    @Column (length = 100)
+    @Column (nullable = false,length = 100)
     private String lesson_title;
     private String content;
 

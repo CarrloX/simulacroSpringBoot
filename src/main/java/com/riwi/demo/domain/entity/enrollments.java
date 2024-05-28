@@ -24,7 +24,6 @@ public class enrollments {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String enrollment_id;
-    @Column (nullable = false)
     private LocalDate enrollment_date;
 
     @ManyToOne(fetch = FetchType.LAZY)
