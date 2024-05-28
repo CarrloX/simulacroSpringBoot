@@ -1,7 +1,5 @@
 package com.riwi.demo.api.dto.response;
 
-import java.util.List;
-
 import com.riwi.demo.utils.enums.Role;
 
 import lombok.AllArgsConstructor;
@@ -13,11 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class userResp {
+public class basicUser {
     private String user_id;
     private String username;
     private String email;
     private String full_name;
     private Role role;
-    private List<coursesToUsers> courses;
 }
