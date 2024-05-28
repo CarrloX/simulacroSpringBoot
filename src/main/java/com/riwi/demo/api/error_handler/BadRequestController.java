@@ -11,24 +11,38 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.riwi.demo.api.dto.errors.BaseErrorResponse;
 import com.riwi.demo.api.dto.errors.ErrorsResp;
+import com.riwi.demo.utils.enums.exceptions.BadRequestException;
 
 @RestControllerAdvice
 @ResponseStatus(code = HttpStatus.BAD_REQUEST)
 public class BadRequestController {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public BaseErrorResponse handleBadRequest(
-            MethodArgumentNotValidException exception) {
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        public BaseErrorResponse handleBadRequest(
+                        MethodArgumentNotValidException exception) {
 
-        List<String> errors = new ArrayList<>();
+                List<String> errors = new ArrayList<>();
 
-        exception.getAllErrors()
-                .forEach(error -> errors.add(error.getDefaultMessage()));
+                exception.getAllErrors()
+                                .forEach(error -> errors.add(error.getDefaultMessage()));
 
-        return ErrorsResp.builder()
-                .code(HttpStatus.BAD_REQUEST.value())
-                .status(HttpStatus.BAD_REQUEST.name())
-                .errors(errors)
-                .build();
-    }
+                return ErrorsResp.builder()
+                                .code(HttpStatus.BAD_REQUEST.value())
+                                .status(HttpStatus.BAD_REQUEST.name())
+                                .errors(errors)
+                                .build();
+        }
+
+        @ExceptionHandler(BadRequestException.class)
+        public BaseErrorResponse badRequest(BadRequestException exception) {
+                List<String> errors = new ArrayList<>();
+
+                errors.add(exception.getMessage());
+
+                return ErrorsResp.builder()
+                                .code(HttpStatus.BAD_REQUEST.value())
+                                .status(HttpStatus.BAD_REQUEST.name())
+                                .errors(errors)
+                                .build();
+        }
 }
