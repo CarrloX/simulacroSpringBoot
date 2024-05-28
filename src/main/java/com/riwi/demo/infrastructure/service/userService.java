@@ -10,6 +10,8 @@ import com.riwi.demo.domain.entity.users;
 import com.riwi.demo.domain.repositories.usersRepositoy;
 import com.riwi.demo.infrastructure.abstract_services.IUserService;
 import com.riwi.demo.utils.enums.Role;
+import com.riwi.demo.utils.enums.exceptions.BadRequestException;
+import com.riwi.demo.utils.messages.ErrorMessage;
 
 import lombok.AllArgsConstructor;
 
@@ -58,5 +60,10 @@ public class userService implements IUserService {
                 .full_name(user.getFull_name())
                 .role(user.getRole().equals("STUDENT" )? Role.STUDENT : Role.INSTRUCTOR)
                 .build();
+    }
+
+    private users find(String id){
+        return this.usersRepositoy.findById(id)
+        .orElseThrow(()->new BadRequestException(ErrorMessage.idNotFound("user")));
     }
 }
