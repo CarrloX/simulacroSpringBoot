@@ -9,7 +9,7 @@ public interface CrudService<RQ,RS,ID> {
 
     public RS update(RQ request, ID id);
 
-    public Void delete (ID id);
+    public void delete (ID id);
 
     public Page<RS> getAll(int Page, int size);
 }
