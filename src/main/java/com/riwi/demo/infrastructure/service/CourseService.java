@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.riwi.demo.api.dto.request.CoursesReq;
 import com.riwi.demo.api.dto.response.BasicUser;
 import com.riwi.demo.api.dto.response.coursesResp;
-import com.riwi.demo.api.dto.response.UserResp;
 import com.riwi.demo.domain.entity.Courses;
 import com.riwi.demo.domain.entity.Users;
 import com.riwi.demo.domain.repositories.CoursesRepository;
@@ -38,7 +37,7 @@ public class CourseService implements ICourseService {
                 .orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("instructor")));
 
                 if (instructor.getRole().name().equals("STUDENT")) {
-                    throw new BadRequestException("No cumples el rol para se instructor de este curso");
+                    throw new BadRequestException("No cumples el rol para ser instructor de este curso");
                 }
 
         Courses course = this.requestToEntity(request);
@@ -49,20 +48,32 @@ public class CourseService implements ICourseService {
 
     @Override
     public coursesResp get(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        return this.entityToResponse(this.find(id));
     }
 
     @Override
     public coursesResp update(CoursesReq request, String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        
+        Courses course = this.find(id);
+
+        Users instructor = this.usersRepository.findById(request.getInstructor_id())
+        .orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("instructor")));
+
+        if (instructor.getRole().name().equals("STUDENT")) {
+            throw new BadRequestException("el id insertado no cumple con el rol para ser instructor de este curso");
+        }
+
+        course = this.requestToEntity(request);
+
+        course.setInstructor(instructor);
+        course.setCourse_id(id);
+
+        return this.entityToResponse(this.coursesRepository.save(course));
     }
 
     @Override
     public void delete(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        this.coursesRepository.delete(this.find(id));
     }
 
     @Override
