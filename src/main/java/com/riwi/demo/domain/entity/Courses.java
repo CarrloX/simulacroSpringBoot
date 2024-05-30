@@ -1,6 +1,5 @@
 package com.riwi.demo.domain.entity;
 
-import java.sql.Date;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -24,22 +23,21 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "activityes")
-public class activityes {
+@Entity(name = "courses")
+public class Courses {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String activity_id;
-    @Column(nullable = false,length = 100)
-    private String activity_title;
+    private String course_id;
+    @Column(nullable = false,unique = true,length = 100)
+    private String course_name;
     private String description;
-    private Date due_date;
-
+    
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lesson_id", referencedColumnName = "lesson_id")
-    private lessons lesson_id;
+    @JoinColumn(name = "instructor_id", referencedColumnName = "user_id")
+    private Users instructor;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "activity_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = false)
-    private List<submissions> submissions;
+    @OneToMany(mappedBy = "course_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = false)
+    private List<Lessons> lessons;
 }

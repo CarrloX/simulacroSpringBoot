@@ -26,7 +26,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "users")
-public class users {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String user_id;
@@ -45,5 +45,5 @@ public class users {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "instructor", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = false)
-    private List<courses> courses;
+    private List<Courses> courses;
 }

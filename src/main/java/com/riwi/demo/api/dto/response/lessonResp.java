@@ -2,8 +2,8 @@ package com.riwi.demo.api.dto.response;
 
 import java.util.List;
 
-import com.riwi.demo.domain.entity.activityes;
-import com.riwi.demo.domain.entity.courses;
+import com.riwi.demo.domain.entity.Activityes;
+import com.riwi.demo.domain.entity.Courses;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +18,6 @@ public class lessonResp {
     private String lesson_id;
     private String lesson_title;
     private String content;
-    private courses course_id;
-    private List<activityes> lessons;
+    private Courses course_id;
+    private List<Activityes> lessons;
 }

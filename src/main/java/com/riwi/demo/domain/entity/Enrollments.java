@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class enrollments {
+public class Enrollments {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String enrollment_id;
@@ -27,9 +27,9 @@ public class enrollments {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private users user_id;
+    private Users user_id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id", referencedColumnName = "course_id")
-    private courses course_id;
+    private Courses course_id;
 }

@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "messages")
-public class messages {
+public class Messages {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String message_id;
@@ -27,13 +27,13 @@ public class messages {
 
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "course_id")
-    private courses course_id;
+    private Courses course_id;
 
     @ManyToOne
     @JoinColumn(name = "sender_id", referencedColumnName = "user_id")
-    private users sender_id;
+    private Users sender_id;
 
     @ManyToOne
     @JoinColumn(name = "receiver_id", referencedColumnName = "user_id")
-    private users receiver_id;
+    private Users receiver_id;
 }

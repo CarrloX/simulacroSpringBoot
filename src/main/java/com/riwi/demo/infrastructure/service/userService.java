@@ -10,10 +10,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.riwi.demo.api.dto.request.userReq;
+import com.riwi.demo.api.dto.response.UserInstructorResp;
 import com.riwi.demo.api.dto.response.coursesToUsers;
 import com.riwi.demo.api.dto.response.userResp;
-import com.riwi.demo.domain.entity.courses;
-import com.riwi.demo.domain.entity.users;
+import com.riwi.demo.domain.entity.Courses;
+import com.riwi.demo.domain.entity.Users;
 import com.riwi.demo.domain.repositories.usersRepository;
 import com.riwi.demo.infrastructure.abstract_services.IUserService;
 import com.riwi.demo.utils.enums.Role;
@@ -31,7 +32,7 @@ public class userService implements IUserService {
 
     @Override
     public userResp create(userReq request) {
-        users user = this.requestToEntity(request);
+        Users user = this.requestToEntity(request);
         user.setCourses(new ArrayList<>());
         return this.entityToResp(this.usersRepositoy.save(user));
     }
@@ -43,9 +44,9 @@ public class userService implements IUserService {
 
     @Override
     public userResp update(userReq request, String id) {
-        users user = this.find(id);
+        Users user = this.find(id);
 
-        users userUpdate = this.requestToEntity(request);
+        Users userUpdate = this.requestToEntity(request);
         userUpdate.setUser_id(id);
         userUpdate.setCourses(user.getCourses());
 
@@ -54,7 +55,7 @@ public class userService implements IUserService {
 
     @Override
     public void delete(String id) {
-        users user = this.find(id);
+        Users user = this.find(id);
         this.usersRepositoy.delete(user);
     }
 
@@ -69,7 +70,7 @@ public class userService implements IUserService {
                 .map(user -> this.entityToResp(user));
     }
 
-    private userResp entityToResp(users entity) {
+    private userResp entityToResp(Users entity) {
 
         List<coursesToUsers> courses = entity.getCourses()
                 .stream()
@@ -86,18 +87,25 @@ public class userService implements IUserService {
                 .build();
     }
 
-    private coursesToUsers entityToResponseCourses(courses entity) {
-
+    private coursesToUsers entityToResponseCourses(Courses entity) {
+        UserInstructorResp instructor =  UserInstructorResp.builder()
+        .user_id(entity.getInstructor().getUser_id())
+        .username(entity.getInstructor().getUsername())
+        .email(entity.getInstructor().getEmail())
+        .full_name(entity.getInstructor().getFull_name())
+        .role(entity.getInstructor().getRole())
+        .build();
+        
         return coursesToUsers.builder()
                 .course_id(entity.getCourse_id())
                 .course_name(entity.getCourse_name())
                 .description(entity.getDescription())
-                .instructor_id(entity.getInstructor())
+                .instructor_id(instructor)
                 .build();
     }
 
-    private users requestToEntity(userReq user) {
-        return users.builder()
+    private Users requestToEntity(userReq user) {
+        return Users.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .email(user.getEmail())
@@ -106,8 +114,8 @@ public class userService implements IUserService {
                 .build();
     }
 
-    private users find(String id) {
+    private Users find(String id) {
         return this.usersRepositoy.findById(id)
-                .orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("user")));
+                .orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("servicio")));
     }
 }
