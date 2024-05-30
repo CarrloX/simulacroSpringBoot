@@ -17,4 +17,5 @@ public class basicUser {
     private String email;
     private String full_name;
     private Role role;
+
 }

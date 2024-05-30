@@ -3,9 +3,9 @@ package com.riwi.demo.domain.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.riwi.demo.domain.entity.activityes;
+import com.riwi.demo.domain.entity.messages;
 
 @Repository
-public interface activityesRepositoy extends JpaRepository<activityes, String>{
+public interface messagesRepository extends JpaRepository<messages, String>{
     
 }

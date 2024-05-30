@@ -14,7 +14,7 @@ import com.riwi.demo.api.dto.response.coursesToUsers;
 import com.riwi.demo.api.dto.response.userResp;
 import com.riwi.demo.domain.entity.courses;
 import com.riwi.demo.domain.entity.users;
-import com.riwi.demo.domain.repositories.usersRepositoy;
+import com.riwi.demo.domain.repositories.usersRepository;
 import com.riwi.demo.infrastructure.abstract_services.IUserService;
 import com.riwi.demo.utils.enums.Role;
 import com.riwi.demo.utils.enums.exceptions.BadRequestException;
@@ -27,7 +27,7 @@ import lombok.AllArgsConstructor;
 public class userService implements IUserService {
 
     @Autowired
-    private final usersRepositoy usersRepositoy;
+    private final usersRepository usersRepositoy;
 
     @Override
     public userResp create(userReq request) {
