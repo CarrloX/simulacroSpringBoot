@@ -15,49 +15,51 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.riwi.demo.api.dto.request.CoursesReq;
+import com.riwi.demo.api.dto.request.LessonReq;
 import com.riwi.demo.api.dto.response.CoursesResp;
-import com.riwi.demo.infrastructure.abstract_services.ICourseService;
+import com.riwi.demo.api.dto.response.LessonResp;
+import com.riwi.demo.infrastructure.abstract_services.ILessonService;
 
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping(path = "/courses")
+@RequestMapping(path = "/lessons")
 @AllArgsConstructor
-public class CoursesController {
+public class LessonsController {
 
     @Autowired
-    private final ICourseService courseService;
+    private final ILessonService lessonService;
+
+    @PostMapping
+    public ResponseEntity<LessonResp> insert(
+            @Validated @RequestBody LessonReq request) {
+        return ResponseEntity.ok(this.lessonService.create(request));
+    }
 
     @GetMapping
-    public ResponseEntity<Page<CoursesResp>> getAll(
+    public ResponseEntity<Page<LessonResp>> getAll(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size) {
 
-        return ResponseEntity.ok(this.courseService.getAll(page - 1, size));
+        return ResponseEntity.ok(this.lessonService.getAll(page - 1, size));
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<CoursesResp> get(
+    public ResponseEntity<LessonResp> get(
             @PathVariable String id) {
-        return ResponseEntity.ok(this.courseService.get(id));
-    }
-
-    @PutMapping(path = "/{id}")
-    public ResponseEntity<CoursesResp> update(
-            @Validated @RequestBody CoursesReq request,
-            @PathVariable String id) {
-        return ResponseEntity.ok(this.courseService.update(request, id));
-    }
-
-    @PostMapping
-    public ResponseEntity<CoursesResp> insert(
-            @Validated @RequestBody CoursesReq request) {
-        return ResponseEntity.ok(this.courseService.create(request));
+        return ResponseEntity.ok(this.lessonService.get(id));
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
-        this.courseService.delete(id);
+        this.lessonService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<LessonResp> update(
+            @Validated @RequestBody LessonReq request,
+            @PathVariable String id) {
+        return ResponseEntity.ok(this.lessonService.update(request, id));
     }
 }

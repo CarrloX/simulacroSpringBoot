@@ -3,7 +3,6 @@ package com.riwi.demo.api.dto.response;
 import java.util.List;
 
 import com.riwi.demo.domain.entity.Activityes;
-import com.riwi.demo.domain.entity.Courses;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +17,6 @@ public class LessonResp {
     private String lesson_id;
     private String lesson_title;
     private String content;
-    private Courses course_id;
-    private List<Activityes> lessons;
+    private BasicCourseResp course;
+    private List<Activityes> activityes;
 }

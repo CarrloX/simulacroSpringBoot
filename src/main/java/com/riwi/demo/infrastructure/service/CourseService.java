@@ -1,5 +1,8 @@
 package com.riwi.demo.infrastructure.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -7,9 +10,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.riwi.demo.api.dto.request.CoursesReq;
+import com.riwi.demo.api.dto.response.BasicLessonResp;
 import com.riwi.demo.api.dto.response.BasicUser;
-import com.riwi.demo.api.dto.response.coursesResp;
+import com.riwi.demo.api.dto.response.CoursesResp;
 import com.riwi.demo.domain.entity.Courses;
+import com.riwi.demo.domain.entity.Lessons;
 import com.riwi.demo.domain.entity.Users;
 import com.riwi.demo.domain.repositories.CoursesRepository;
 import com.riwi.demo.domain.repositories.UsersRepository;
@@ -32,13 +37,13 @@ public class CourseService implements ICourseService {
     private final UsersRepository usersRepository;
 
     @Override
-    public coursesResp create(CoursesReq request) {
+    public CoursesResp create(CoursesReq request) {
         Users instructor = this.usersRepository.findById(request.getInstructor_id())
                 .orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("instructor")));
 
-                if (instructor.getRole().name().equals("STUDENT")) {
-                    throw new BadRequestException("No cumples el rol para ser instructor de este curso");
-                }
+        if (instructor.getRole().name().equals("STUDENT")) {
+            throw new BadRequestException("No cumples el rol para ser instructor de este curso");
+        }
 
         Courses course = this.requestToEntity(request);
 
@@ -47,17 +52,17 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public coursesResp get(String id) {
+    public CoursesResp get(String id) {
         return this.entityToResponse(this.find(id));
     }
 
     @Override
-    public coursesResp update(CoursesReq request, String id) {
-        
+    public CoursesResp update(CoursesReq request, String id) {
+
         Courses course = this.find(id);
 
         Users instructor = this.usersRepository.findById(request.getInstructor_id())
-        .orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("instructor")));
+                .orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("instructor")));
 
         if (instructor.getRole().name().equals("STUDENT")) {
             throw new BadRequestException("el id insertado no cumple con el rol para ser instructor de este curso");
@@ -77,7 +82,7 @@ public class CourseService implements ICourseService {
     }
 
     @Override
-    public Page<coursesResp> getAll(int Page, int size) {
+    public Page<CoursesResp> getAll(int Page, int size) {
         if (Page < 0)
             Page = 0;
 
@@ -87,19 +92,24 @@ public class CourseService implements ICourseService {
                 .map(course -> this.entityToResponse(course));
     }
 
-    private coursesResp entityToResponse(Courses entity) {
+    private CoursesResp entityToResponse(Courses entity) {
 
         BasicUser instructor = new BasicUser();
         BeanUtils.copyProperties(entity.getInstructor(), instructor);
 
-        return coursesResp.builder()
+        List<BasicLessonResp> basicLessonResp = new ArrayList<>();
+        for (Lessons lesson : entity.getLessons()) {
+            basicLessonResp.add(new BasicLessonResp(lesson.getLesson_id(), lesson.getLesson_title(),
+                    lesson.getContent(), lesson.getActivityes()));
+        }
+
+        return CoursesResp.builder()
                 .course_id(entity.getCourse_id())
                 .course_name(entity.getCourse_name())
                 .description(entity.getDescription())
                 .user(instructor)
-                .lessons(entity.getLessons())
+                .basicLesson(basicLessonResp)
                 .build();
-
     }
 
     private Courses requestToEntity(CoursesReq request) {

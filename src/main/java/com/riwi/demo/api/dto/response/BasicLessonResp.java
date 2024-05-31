@@ -2,6 +2,8 @@ package com.riwi.demo.api.dto.response;
 
 import java.util.List;
 
+import com.riwi.demo.domain.entity.Activityes;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,11 +13,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CoursesResp {
-    private String course_id;
-    private String course_name;
-    private String description;
-    // private Users instructor_id;
-    private BasicUser user;
-    private List<BasicLessonResp> basicLesson;
+public class BasicLessonResp {
+    private String lesson_id;
+    private String lesson_title;
+    private String content;
+    private List<Activityes> activityes;
 }
