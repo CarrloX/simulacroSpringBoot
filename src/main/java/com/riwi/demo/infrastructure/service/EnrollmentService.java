@@ -3,6 +3,7 @@ package com.riwi.demo.infrastructure.service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.riwi.demo.api.dto.request.EnrollmentReq;
@@ -42,7 +43,7 @@ public class EnrollmentService implements IEnrollmentService {
                 .orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("estudiante")));
 
         Courses course = this.coursesRepository.findById(request.getCourse_id())
-                .orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("curso")));        
+                .orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("curso")));
 
         if (student.getRole().name().equals("INSTRUCTOR")) {
             throw new BadRequestException("No cumples el rol para ser estudiante de este curso");
@@ -57,26 +58,46 @@ public class EnrollmentService implements IEnrollmentService {
 
     @Override
     public EnrollmentsResp get(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        return this.entityToResponse(this.find(id));
     }
 
     @Override
     public EnrollmentsResp update(EnrollmentReq request, String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+
+        Enrollments enrollment = this.find(id);
+
+        Users student = this.usersRepository.findById(request.getUser_id())
+                .orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("estudiante")));
+
+        if (student.getRole().name().equals("INSTRUCTOR")) {
+            throw new BadRequestException("el id insertado no cumple con el rol para ser estudiante de este curso");
+        }
+
+        Courses course = this.coursesRepository.findById(request.getCourse_id())
+                .orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("curso")));
+
+        enrollment = this.requestToEntity(request);
+
+        enrollment.setUser_id(student);
+        enrollment.setCourse_id(course);
+
+        return this.entityToResponse(this.enrollmentsRepository.save(enrollment));
     }
 
     @Override
     public void delete(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        this.enrollmentsRepository.delete(this.find(id));
     }
 
     @Override
     public Page<EnrollmentsResp> getAll(int Page, int size) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        if (Page < 0)
+            Page = 0;
+
+        PageRequest pagination = PageRequest.of(Page, size);
+
+        return this.enrollmentsRepository.findAll(pagination)
+                .map(enrollment -> this.entityToResponse(enrollment));
     }
 
     private EnrollmentsResp entityToResponse(Enrollments entity) {
@@ -102,8 +123,8 @@ public class EnrollmentService implements IEnrollmentService {
 
         Users student = this.usersRepository.findById(request.getUser_id())
                 .orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("estudiante")));
-                
-                return Enrollments.builder()
+
+        return Enrollments.builder()
                 .enrollment_date(request.getEnrollment_date())
                 .user_id(student)
                 .course_id(course)
