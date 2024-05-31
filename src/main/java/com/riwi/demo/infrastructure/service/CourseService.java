@@ -109,9 +109,12 @@ public class CourseService implements ICourseService {
         BeanUtils.copyProperties(entity.getInstructor(), instructor);
 
         List<BasicLessonResp> basicLessonResp = new ArrayList<>();
-        for (Lessons lesson : entity.getLessons()) {
-            basicLessonResp.add(new BasicLessonResp(lesson.getLesson_id(), lesson.getLesson_title(),
-                    lesson.getContent()));
+        //si queremos que imprima una lista de otra entidad aunque este vacia hacemos esta validacion
+        if (entity.getLessons() != null) {
+            for (Lessons lesson : entity.getLessons()) {
+                basicLessonResp.add(new BasicLessonResp(lesson.getLesson_id(), lesson.getLesson_title(),
+                        lesson.getContent()));
+            }
         }
 
         return CoursesResp.builder()
