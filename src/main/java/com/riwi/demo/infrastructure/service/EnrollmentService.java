@@ -80,6 +80,7 @@ public class EnrollmentService implements IEnrollmentService {
 
         enrollment.setUser_id(student);
         enrollment.setCourse_id(course);
+        enrollment.setEnrollment_id(id);
 
         return this.entityToResponse(this.enrollmentsRepository.save(enrollment));
     }
