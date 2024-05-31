@@ -1,5 +1,7 @@
 package com.riwi.demo.api.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.riwi.demo.api.dto.request.CoursesReq;
+import com.riwi.demo.api.dto.response.BasicLessonResp;
 import com.riwi.demo.api.dto.response.CoursesResp;
 import com.riwi.demo.infrastructure.abstract_services.ICourseService;
 
@@ -60,4 +63,10 @@ public class CoursesController {
         this.courseService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping(path = "/{id}/lessons")
+    public ResponseEntity<List<BasicLessonResp>> getLessonsByCourseId(@PathVariable String id) {
+        return ResponseEntity.ok(courseService.getLessonsByCourseId(id));
+    }
+
 }

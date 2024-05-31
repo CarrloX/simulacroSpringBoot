@@ -2,12 +2,14 @@ package com.riwi.demo.infrastructure.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.riwi.demo.api.dto.request.CoursesReq;
 import com.riwi.demo.api.dto.response.BasicLessonResp;
@@ -90,6 +92,15 @@ public class CourseService implements ICourseService {
 
         return this.coursesRepository.findAll(pagination)
                 .map(course -> this.entityToResponse(course));
+    }
+
+    @Override
+    public List<BasicLessonResp> getLessonsByCourseId(@PathVariable String courseId) {
+        Courses course = this.find(courseId);
+        return course.getLessons().stream()
+                .map(lesson -> new BasicLessonResp(lesson.getLesson_id(), lesson.getLesson_title(),
+                        lesson.getContent()))
+                .collect(Collectors.toList());
     }
 
     private CoursesResp entityToResponse(Courses entity) {
