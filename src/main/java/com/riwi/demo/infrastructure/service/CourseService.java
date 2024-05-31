@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.riwi.demo.api.dto.request.CoursesReq;
 import com.riwi.demo.api.dto.response.BasicLessonResp;
-import com.riwi.demo.api.dto.response.BasicUser;
+import com.riwi.demo.api.dto.response.BasicUserResp;
 import com.riwi.demo.api.dto.response.CoursesResp;
 import com.riwi.demo.domain.entity.Courses;
 import com.riwi.demo.domain.entity.Lessons;
@@ -94,7 +94,7 @@ public class CourseService implements ICourseService {
 
     private CoursesResp entityToResponse(Courses entity) {
 
-        BasicUser instructor = new BasicUser();
+        BasicUserResp instructor = new BasicUserResp();
         BeanUtils.copyProperties(entity.getInstructor(), instructor);
 
         List<BasicLessonResp> basicLessonResp = new ArrayList<>();

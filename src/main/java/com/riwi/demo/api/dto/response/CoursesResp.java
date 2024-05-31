@@ -16,6 +16,6 @@ public class CoursesResp {
     private String course_name;
     private String description;
     // private Users instructor_id;
-    private BasicUser user;
+    private BasicUserResp user;
     private List<BasicLessonResp> basicLesson;
 }

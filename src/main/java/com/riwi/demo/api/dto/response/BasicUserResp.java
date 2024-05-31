@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BasicUser {
+public class BasicUserResp {
     private String user_id;
     private String username;
     private String email;

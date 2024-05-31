@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.riwi.demo.api.dto.request.CoursesReq;
 import com.riwi.demo.api.dto.request.LessonReq;
-import com.riwi.demo.api.dto.response.CoursesResp;
 import com.riwi.demo.api.dto.response.LessonResp;
 import com.riwi.demo.infrastructure.abstract_services.ILessonService;
 

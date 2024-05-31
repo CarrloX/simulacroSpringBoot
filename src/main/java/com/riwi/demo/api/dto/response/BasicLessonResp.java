@@ -1,9 +1,5 @@
 package com.riwi.demo.api.dto.response;
 
-import java.util.List;
-
-import com.riwi.demo.domain.entity.Activityes;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
