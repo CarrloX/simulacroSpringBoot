@@ -100,7 +100,7 @@ public class CourseService implements ICourseService {
         List<BasicLessonResp> basicLessonResp = new ArrayList<>();
         for (Lessons lesson : entity.getLessons()) {
             basicLessonResp.add(new BasicLessonResp(lesson.getLesson_id(), lesson.getLesson_title(),
-                    lesson.getContent(), lesson.getActivityes()));
+                    lesson.getContent()));
         }
 
         return CoursesResp.builder()

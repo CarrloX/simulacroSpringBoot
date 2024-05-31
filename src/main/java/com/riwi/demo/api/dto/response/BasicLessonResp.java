@@ -17,5 +17,5 @@ public class BasicLessonResp {
     private String lesson_id;
     private String lesson_title;
     private String content;
-    private List<Activityes> activityes;
+    // private List<Activityes> activityes;
 }
