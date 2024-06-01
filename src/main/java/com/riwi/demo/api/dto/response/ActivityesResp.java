@@ -1,10 +1,7 @@
 package com.riwi.demo.api.dto.response;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
-
-import com.riwi.demo.domain.entity.Lessons;
-import com.riwi.demo.domain.entity.Submissions;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +16,7 @@ public class ActivityesResp {
     private String activity_id;
     private String activity_title;
     private String description;
-    private Date due_date;
-    private Lessons lesson_id;
-    private List<Submissions> submissions;
+    private LocalDate due_date;
+    private BasicLessonResp lesson_id;
+    private List<BasicSubmissionResp> submissions;
 }

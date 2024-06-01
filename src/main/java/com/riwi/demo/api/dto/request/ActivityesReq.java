@@ -1,8 +1,6 @@
 package com.riwi.demo.api.dto.request;
 
-import java.sql.Date;
-
-import com.riwi.demo.domain.entity.Lessons;
+import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -20,7 +18,7 @@ public class ActivityesReq {
     @NotBlank(message = "la descripción de la actividad es requerida")
     private String description;
     @NotBlank(message = "la fecha de vencimiento es requerida")
-    private Date due_date;
+    private LocalDate due_date;
     @NotBlank(message = "el id de la lección es requerida")
-    private Lessons lesson_id;
+    private String lesson_id;
 }

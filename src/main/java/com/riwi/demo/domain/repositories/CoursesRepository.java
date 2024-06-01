@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.riwi.demo.domain.entity.Courses;
 
 @Repository
-public interface CoursesRepository extends JpaRepository<Courses, String>{
-    
+public interface CoursesRepository extends JpaRepository<Courses, String> {
+
 }

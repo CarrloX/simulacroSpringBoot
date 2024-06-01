@@ -1,6 +1,6 @@
 package com.riwi.demo.domain.entity;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -32,7 +32,7 @@ public class Activityes {
     @Column(nullable = false,length = 100)
     private String activity_title;
     private String description;
-    private Date due_date;
+    private LocalDate due_date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lesson_id", referencedColumnName = "lesson_id")

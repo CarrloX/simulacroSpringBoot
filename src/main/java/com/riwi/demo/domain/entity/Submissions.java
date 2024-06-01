@@ -1,6 +1,6 @@
 package com.riwi.demo.domain.entity;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -30,15 +30,15 @@ public class Submissions {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String submission_id;
     private String content;
-    private Date submission_date;
+    private LocalDate submission_date;
     @DecimalMax("5,2")
     private double grade;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id",referencedColumnName = "user_id")
     private Users user_id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_id",referencedColumnName = "activity_id")
     private Activityes activity_id;
 
