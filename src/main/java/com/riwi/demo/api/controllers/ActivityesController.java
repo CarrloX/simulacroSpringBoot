@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.riwi.demo.api.dto.request.ActivityesReq;
-import com.riwi.demo.api.dto.request.CoursesReq;
 import com.riwi.demo.api.dto.response.ActivityesResp;
-import com.riwi.demo.api.dto.response.CoursesResp;
 import com.riwi.demo.infrastructure.abstract_services.IActivityService;
 
 import lombok.AllArgsConstructor;

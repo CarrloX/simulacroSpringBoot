@@ -18,7 +18,6 @@ import com.riwi.demo.domain.entity.Lessons;
 import com.riwi.demo.domain.entity.Submissions;
 import com.riwi.demo.domain.repositories.ActivityesRepository;
 import com.riwi.demo.domain.repositories.LessonsRepository;
-import com.riwi.demo.domain.repositories.SubmissionsRepository;
 import com.riwi.demo.infrastructure.abstract_services.IActivityService;
 import com.riwi.demo.utils.enums.exceptions.BadRequestException;
 import com.riwi.demo.utils.messages.ErrorMessage;
@@ -33,9 +32,6 @@ public class ActivityService implements IActivityService {
 
     @Autowired
     private final ActivityesRepository activityRepository;
-
-    @Autowired
-    private final SubmissionsRepository submissionsRepository;
 
     @Autowired
     private final LessonsRepository lessonsRepository;

@@ -1,9 +1,6 @@
 package com.riwi.demo.api.dto.response;
 
 import java.time.LocalDate;
-import java.util.List;
-
-import com.riwi.demo.domain.entity.Activityes;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +17,6 @@ public class SubmissionResp {
     private LocalDate submission_date;
     private double grade;
     private BasicUserResp user;
-    private Activityes activity;
-    private List<BasicUserResp> users;
+    private BasicActivityResp activity_id;
+    // private List<BasicUserResp> users;
 }
