@@ -3,6 +3,7 @@ package com.riwi.demo.infrastructure.service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.riwi.demo.api.dto.request.SubmissionReq;
@@ -62,26 +63,47 @@ public class SubmissionService implements ISubmisionService {
 
     @Override
     public SubmissionResp update(SubmissionReq request, String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        
+        Submissions submission = this.find(id);
+
+        Users student = this.usersRepository.findById(request.getUser_id())
+                .orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("estudiante")));
+
+        if (student.getRole().name().equals("INSTRUCTOR")) {
+            throw new BadRequestException("No cumples el rol para ser estudiante de este curso");
+        }
+
+        Activityes activity = this.activityesRepository.findById(request.getActivity_id())
+                .orElseThrow(() -> new BadRequestException(ErrorMessage.idNotFound("actividad")));
+
+        submission = this.requestToEntity(request);
+        
+        submission.setUser_id(student);
+        submission.setActivity_id(activity);
+        submission.setSubmission_id(id);
+        
+        return this.entityToResponse(this.submissionsRepository.save(submission));
     }
 
     @Override
     public SubmissionResp get(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        return this.entityToResponse(this.find(id));
     }
 
     @Override
     public void delete(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        this.submissionsRepository.delete(this.find(id));
     }
 
     @Override
     public Page<SubmissionResp> getAll(int Page, int size) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        if (Page < 0)
+            Page = 0;
+
+        PageRequest pagination = PageRequest.of(Page, size);
+
+        return this.submissionsRepository.findAll(pagination)
+                .map(submission -> this.entityToResponse(submission));
     }
 
     private SubmissionResp entityToResponse(Submissions entity) {
@@ -90,7 +112,7 @@ public class SubmissionService implements ISubmisionService {
         BeanUtils.copyProperties(entity.getUser_id(), student);
 
         BasicActivityResp activity = new BasicActivityResp();
-        if(entity.getActivity_id() != null){
+        if (entity.getActivity_id() != null) {
             BeanUtils.copyProperties(entity.getActivity_id(), activity);
         }
         BeanUtils.copyProperties(entity.getActivity_id(), activity);
