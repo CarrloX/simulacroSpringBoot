@@ -121,6 +121,7 @@ public class SubmissionService implements ISubmisionService {
                 .submission_id(entity.getSubmission_id())
                 .content(entity.getContent())
                 .submission_date(entity.getSubmission_date())
+                .grade(entity.getGrade())
                 .user(student)
                 .activity_id(activity)
                 .build();
@@ -137,6 +138,7 @@ public class SubmissionService implements ISubmisionService {
         return Submissions.builder()
                 .content(request.getContent())
                 .submission_date(request.getSubmission_date())
+                .grade(request.getGrade())
                 .user_id(student)
                 .activity_id(activity)
                 .build();
