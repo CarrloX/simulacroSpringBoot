@@ -1,6 +1,6 @@
 package com.riwi.demo.domain.entity;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +23,7 @@ public class Messages {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String message_id;
     private String message_content;
-    private Date send_date;
+    private LocalDate send_date;
 
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "course_id")
