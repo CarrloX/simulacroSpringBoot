@@ -1,5 +1,7 @@
 package com.riwi.demo.api.dto.response;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BasicLessonResp {
-    private String lesson_id;
-    private String lesson_title;
-    private String content;
+public class BasicMessagesResp {
+    private String message_id;
+    private String message_content;
+    private LocalDate send_date;
 }

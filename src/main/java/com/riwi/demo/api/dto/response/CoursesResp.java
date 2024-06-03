@@ -15,7 +15,7 @@ public class CoursesResp {
     private String course_id;
     private String course_name;
     private String description;
-    // private Users instructor_id;
     private BasicUserResp user;
     private List<BasicLessonResp> basicLesson;
+    private List<MessagesResp> messages;
 }

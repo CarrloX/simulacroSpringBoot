@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.riwi.demo.api.dto.request.CoursesReq;
 import com.riwi.demo.api.dto.response.BasicLessonResp;
+import com.riwi.demo.api.dto.response.BasicMessagesResp;
 import com.riwi.demo.api.dto.response.CoursesResp;
 import com.riwi.demo.infrastructure.abstract_services.ICourseService;
 
@@ -67,6 +68,11 @@ public class CoursesController {
     @GetMapping(path = "/{id}/lessons")
     public ResponseEntity<List<BasicLessonResp>> getLessonsByCourseId(@PathVariable String id) {
         return ResponseEntity.ok(courseService.getLessonsByCourseId(id));
+    }
+
+    @GetMapping(path = "/{id}/messages")
+    public ResponseEntity<List<BasicMessagesResp>>getMessagesByCourseId(@PathVariable String id) {
+        return ResponseEntity.ok(courseService.getMessagesByCourseId(id));
     }
 
 }

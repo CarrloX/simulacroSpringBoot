@@ -3,6 +3,7 @@ package com.riwi.demo.infrastructure.service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.riwi.demo.api.dto.request.MessagesReq;
@@ -59,8 +60,7 @@ public class MessagesService implements IMessagesService {
 
     @Override
     public MessagesResp get(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        return this.entityToResponse(this.find(id));
     }
 
     @Override
@@ -77,8 +77,13 @@ public class MessagesService implements IMessagesService {
 
     @Override
     public Page<MessagesResp> getAll(int Page, int size) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        if (Page < 0)
+            Page = 0;
+
+        PageRequest pagination = PageRequest.of(Page, size);
+
+        return this.messagesRepository.findAll(pagination)
+                .map(message -> this.entityToResponse(message));
     }
 
     private MessagesResp entityToResponse(Messages entity) {

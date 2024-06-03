@@ -2,6 +2,7 @@ package com.riwi.demo.infrastructure.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.riwi.demo.api.dto.request.CoursesReq;
 import com.riwi.demo.api.dto.response.BasicLessonResp;
+import com.riwi.demo.api.dto.response.BasicMessagesResp;
 import com.riwi.demo.api.dto.response.BasicUserResp;
 import com.riwi.demo.api.dto.response.CoursesResp;
 import com.riwi.demo.domain.entity.Courses;
@@ -103,13 +105,23 @@ public class CourseService implements ICourseService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<BasicMessagesResp> getMessagesByCourseId(@PathVariable String courseId) {
+        Courses course = this.find(courseId);
+        return course.getMessages().stream()
+                .map(message -> new BasicMessagesResp(message.getMessage_id(), message.getMessage_content(),
+                        message.getSend_date()))
+                .collect(Collectors.toList());
+    }
+
     private CoursesResp entityToResponse(Courses entity) {
 
         BasicUserResp instructor = new BasicUserResp();
         BeanUtils.copyProperties(entity.getInstructor(), instructor);
 
         List<BasicLessonResp> basicLessonResp = new ArrayList<>();
-        //si queremos que imprima una lista de otra entidad aunque este vacia hacemos esta validacion
+        // si queremos que imprima una lista de otra entidad aunque este vacia hacemos
+        // esta validacion
         if (entity.getLessons() != null) {
             for (Lessons lesson : entity.getLessons()) {
                 basicLessonResp.add(new BasicLessonResp(lesson.getLesson_id(), lesson.getLesson_title(),

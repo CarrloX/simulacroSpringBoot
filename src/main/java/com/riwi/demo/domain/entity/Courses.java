@@ -40,4 +40,9 @@ public class Courses {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "course_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Lessons> lessons;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "course_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = false)
+    private List<Messages> messages;
 }
