@@ -13,6 +13,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,11 +38,15 @@ public class Users {
     private String password;
     @Column(length = 100)
     private String email;
-    @Column(length = 100,nullable = false)
+    @Column(length = 100, nullable = false)
     private String full_name;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id", referencedColumnName = "course_id")
+    private Courses course;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

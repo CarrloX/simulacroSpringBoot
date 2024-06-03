@@ -27,6 +27,7 @@ import lombok.ToString;
 public class Courses {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "course_id")
     private String course_id;
     @Column(nullable = false,unique = true,length = 100)
     private String course_name;
@@ -45,4 +46,9 @@ public class Courses {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "course_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Messages> messages;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = false)
+    private List<Users> users;
 }

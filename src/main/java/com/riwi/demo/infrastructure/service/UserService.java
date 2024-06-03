@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.riwi.demo.api.dto.request.UserReq;
 import com.riwi.demo.api.dto.response.UserInstructorResp;
 import com.riwi.demo.api.dto.response.BasicCourseResp;
-import com.riwi.demo.api.dto.response.BasicLessonResp;
 import com.riwi.demo.api.dto.response.CoursesToUsers;
 import com.riwi.demo.api.dto.response.UserResp;
 import com.riwi.demo.domain.entity.Courses;

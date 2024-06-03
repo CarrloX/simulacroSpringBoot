@@ -14,5 +14,4 @@ public class CoursesToUsers {
     private String course_name;
     private String description;
     private UserInstructorResp instructor_id;
-    // private List<Lessons> lessons;
 }
