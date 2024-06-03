@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.riwi.demo.api.dto.request.LessonReq;
 import com.riwi.demo.api.dto.response.BasicActivityResp;
-import com.riwi.demo.api.dto.response.BasicLessonResp;
 import com.riwi.demo.api.dto.response.LessonResp;
 import com.riwi.demo.infrastructure.abstract_services.ILessonService;
 

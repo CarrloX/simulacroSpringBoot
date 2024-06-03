@@ -14,7 +14,6 @@ import com.riwi.demo.api.dto.request.LessonReq;
 import com.riwi.demo.api.dto.response.LessonResp;
 import com.riwi.demo.api.dto.response.BasicActivityResp;
 import com.riwi.demo.api.dto.response.BasicCourseResp;
-import com.riwi.demo.api.dto.response.BasicLessonResp;
 import com.riwi.demo.domain.entity.Courses;
 import com.riwi.demo.domain.entity.Lessons;
 import com.riwi.demo.domain.repositories.CoursesRepository;

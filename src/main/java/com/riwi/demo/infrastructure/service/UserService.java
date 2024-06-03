@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.riwi.demo.api.dto.request.UserReq;
 import com.riwi.demo.api.dto.response.UserInstructorResp;
+import com.riwi.demo.api.dto.response.BasicCourseResp;
+import com.riwi.demo.api.dto.response.BasicLessonResp;
 import com.riwi.demo.api.dto.response.CoursesToUsers;
 import com.riwi.demo.api.dto.response.UserResp;
 import com.riwi.demo.domain.entity.Courses;
@@ -70,6 +73,15 @@ public class UserService implements IUserService {
                 .map(user -> this.entityToResp(user));
     }
 
+    @Override
+    public List<BasicCourseResp> getCoursesByUserId(@PathVariable String userId) {
+        Users user = this.find(userId);
+        return user.getCourses().stream()
+                .map(course -> new BasicCourseResp(course.getCourse_id(), course.getCourse_name(),
+                        course.getDescription()))
+                .collect(Collectors.toList());
+    }
+
     private UserResp entityToResp(Users entity) {
 
         List<CoursesToUsers> courses = entity.getCourses()
@@ -88,14 +100,14 @@ public class UserService implements IUserService {
     }
 
     private CoursesToUsers entityToResponseCourses(Courses entity) {
-        UserInstructorResp instructor =  UserInstructorResp.builder()
-        .user_id(entity.getInstructor().getUser_id())
-        .username(entity.getInstructor().getUsername())
-        .email(entity.getInstructor().getEmail())
-        .full_name(entity.getInstructor().getFull_name())
-        .role(entity.getInstructor().getRole())
-        .build();
-        
+        UserInstructorResp instructor = UserInstructorResp.builder()
+                .user_id(entity.getInstructor().getUser_id())
+                .username(entity.getInstructor().getUsername())
+                .email(entity.getInstructor().getEmail())
+                .full_name(entity.getInstructor().getFull_name())
+                .role(entity.getInstructor().getRole())
+                .build();
+
         return CoursesToUsers.builder()
                 .course_id(entity.getCourse_id())
                 .course_name(entity.getCourse_name())

@@ -13,5 +13,4 @@ public class BasicCourseResp {
     private String course_id;
     private String course_name;
     private String description;
-    // private BasicUser user;
 }
