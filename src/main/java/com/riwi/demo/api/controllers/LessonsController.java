@@ -1,5 +1,7 @@
 package com.riwi.demo.api.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.riwi.demo.api.dto.request.LessonReq;
+import com.riwi.demo.api.dto.response.BasicActivityResp;
+import com.riwi.demo.api.dto.response.BasicLessonResp;
 import com.riwi.demo.api.dto.response.LessonResp;
 import com.riwi.demo.infrastructure.abstract_services.ILessonService;
 
@@ -59,5 +63,10 @@ public class LessonsController {
             @Validated @RequestBody LessonReq request,
             @PathVariable String id) {
         return ResponseEntity.ok(this.lessonService.update(request, id));
+    }
+
+    @GetMapping(path = "/{id}/activityes")
+    public ResponseEntity<List<BasicActivityResp>> getActivityesByLessonId(@PathVariable String id) {
+        return ResponseEntity.ok(lessonService.getActivityesByLessonId(id));
     }
 }

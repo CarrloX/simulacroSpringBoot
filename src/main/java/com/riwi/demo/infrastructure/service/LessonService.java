@@ -1,14 +1,20 @@
 package com.riwi.demo.infrastructure.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.riwi.demo.api.dto.request.LessonReq;
 import com.riwi.demo.api.dto.response.LessonResp;
+import com.riwi.demo.api.dto.response.BasicActivityResp;
 import com.riwi.demo.api.dto.response.BasicCourseResp;
+import com.riwi.demo.api.dto.response.BasicLessonResp;
 import com.riwi.demo.domain.entity.Courses;
 import com.riwi.demo.domain.entity.Lessons;
 import com.riwi.demo.domain.repositories.CoursesRepository;
@@ -77,6 +83,15 @@ public class LessonService implements ILessonService {
 
         return this.lessonRepository.findAll(pagination)
                 .map(lesson -> this.entityToResponse(lesson));
+    }
+
+    @Override
+    public List<BasicActivityResp> getActivityesByLessonId(@PathVariable String lessonID) {
+        Lessons lesson = this.find(lessonID);
+        return lesson.getActivityes().stream()
+                .map(activity -> new BasicActivityResp(activity.getActivity_id(), activity.getActivity_title(),
+                        activity.getDescription(),activity.getDue_date()))
+                .collect(Collectors.toList());
     }
 
     private LessonResp entityToResponse(Lessons entity) {

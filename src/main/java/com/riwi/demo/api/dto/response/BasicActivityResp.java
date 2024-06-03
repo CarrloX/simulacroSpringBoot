@@ -16,5 +16,5 @@ public class BasicActivityResp {
     private String activity_title;
     private String description;
     private LocalDate due_date;
-    private BasicLessonResp lesson_id;
+    // private BasicLessonResp lesson_id;
 }
