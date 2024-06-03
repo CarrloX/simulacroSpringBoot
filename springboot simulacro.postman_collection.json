@@ -1,0 +1,477 @@
+{
+	"info": {
+		"_postman_id": "9308c7d7-71eb-4d89-8931-024897a9fb51",
+		"name": "springboot simulacro",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "34443818"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/users"
+					},
+					"response": []
+				},
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"andrea\",\r\n    \"password\":\"123456789\",\r\n    \"email\":\"pepe@gmail.com\",\r\n    \"full_name\":\"andrea saldarriaga\",\r\n    \"role\":\"STUDENT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/users"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"celia\",\r\n    \"password\":\"123456789\",\r\n    \"email\":\"pepe@gmail.com\",\r\n    \"full_name\":\"celia armanda\",\r\n    \"role\":\"INSTRUCTOR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/users/b89ce2a0-ccbf-4cc7-8737-7a4c03c99fc2"
+					},
+					"response": []
+				},
+				{
+					"name": "findByid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/users/b3b85685-62fd-4729-8116-2c4537c0875c"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/users/8b727a41-d338-4a30-9c01-4c8295cfdb7d"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "courses",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/courses"
+					},
+					"response": []
+				},
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"course_name\":\"frances\",\n    \"description\":\"aprender frances C1\",\n    \"instructor_id\":\"82fa3798-9920-4da1-9262-fa29570afa46\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/courses"
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/courses/54bbef0a-73f4-4bb2-acf2-bb216a03f9da"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"course_name\":\"frances\",\r\n    \"description\":\"aprender frances C1\",\r\n    \"instructor_id\":\"b3b85685-62fd-4729-8116-2c4537c0875c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/courses/54bbef0a-73f4-4bb2-acf2-bb216a03f9da"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/courses/e0cb3d3f-4781-4895-8513-6aff4a8d67ba"
+					},
+					"response": []
+				},
+				{
+					"name": "getLessonsByCourseId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/courses/fd15b95c-4cae-4714-9a5b-60cace857fa2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "lessons",
+			"item": [
+				{
+					"name": "get_all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/lessons"
+					},
+					"response": []
+				},
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lesson_title\":\"abecedario en frances\",\r\n    \"content\":\"20 minutos aprendiendo el abecedario\",\r\n    \"course_id\":\"fd15b95c-4cae-4714-9a5b-60cace857fa2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/lessons"
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/lessons/9458faed-3941-424e-abaf-3019c82d8535"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/lessons/2255636d-2c4a-4249-8fad-c241544c098e"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lesson_title\":\"sustantivos en ingles\",\r\n    \"content\":\"5 capitulos del libro ingles xxii\",\r\n    \"course_id\":\"32815089-1f08-4f9f-b80f-cc8f5d774df3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/lessons/1b91a9b1-5b94-4c14-acad-75b52f240365"
+					},
+					"response": []
+				},
+				{
+					"name": "getActivityesByLessonId",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "enrollments",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/enrollments"
+					},
+					"response": []
+				},
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\":\"a6bb91a3-78e6-4833-bf9d-5ceca3c70de2\",\n    \"course_id\":\"22377b53-4ee4-4fe9-87e1-b283d29ce88d\",\n    \"enrollment_date\":\"2025-12-12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/enrollments"
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\":\"f33ac8c9-afc1-451f-89c8-63baef48fb83\",\r\n    \"course_id\":\"32815089-1f08-4f9f-b80f-cc8f5d774df3\",\r\n    \"enrollment_date\":\"2025-12-25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/enrollments/6a1aaf0e-f8f1-462d-9986-565c37d507eb"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getCoursesByUserId",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getUsersByCourseId",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "activityes",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"activity_title\":\"frases en frances\",\r\n    \"description\": \"escribir 10 frases en frases\",\r\n    \"due_date\": \"2026-12-25\",\r\n    \"lesson_id\": \"78c5b93c-3233-48f6-a1b2-7bfaba8e80ba\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/activityes"
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"activity_title\":\"frases y adjetivos en frances\",\r\n    \"description\": \"escribir 10 frases y 100 adjetivos en frases\",\r\n    \"due_date\": \"2026-12-25\",\r\n    \"lesson_id\": \"78c5b93c-3233-48f6-a1b2-7bfaba8e80ba\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/activityes/67fc163e-a2ef-41c0-8fe3-2e5af3dcfa25"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "submissions",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/submissions"
+					},
+					"response": []
+				},
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"hola\",\r\n    \"submission_date\":\"2026-12-12\",\r\n    \"grade\":\"5,0\",\r\n    \"user_id\":\"f33ac8c9-afc1-451f-89c8-63baef48fb83\",\r\n    \"activity_id\":\"7b22a84e-d355-4418-8f21-2620ddb5aea6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/submissions"
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "messages",
+			"item": [
+				{
+					"name": "send_message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/messages"
+					},
+					"response": []
+				},
+				{
+					"name": "getMessagesByCourseId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/courses/32815089-1f08-4f9f-b80f-cc8f5d774df3/messages"
+					},
+					"response": []
+				},
+				{
+					"name": "getMessagesByUsers",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
