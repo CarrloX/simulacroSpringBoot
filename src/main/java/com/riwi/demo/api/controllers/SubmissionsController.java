@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.riwi.demo.api.dto.request.EnrollmentReq;
 import com.riwi.demo.api.dto.request.SubmissionReq;
-import com.riwi.demo.api.dto.response.EnrollmentsResp;
 import com.riwi.demo.api.dto.response.SubmissionResp;
 import com.riwi.demo.infrastructure.abstract_services.ISubmisionService;
 

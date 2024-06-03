@@ -1,5 +1,9 @@
 package com.riwi.demo.infrastructure.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -84,6 +88,29 @@ public class MessagesService implements IMessagesService {
 
         return this.messagesRepository.findAll(pagination)
                 .map(message -> this.entityToResponse(message));
+    }
+
+    @Override
+    public List<MessagesResp> getMessagesByUsers(String senderId, String receiverId) {
+        if (isEmpty(senderId) || isEmpty(receiverId)) {
+            throw new BadRequestException("El sender ID o el receiver ID están vacíos");
+        }
+    
+        List<Messages> messages = messagesRepository.findAll();
+        List<Messages> filteredMessages = new ArrayList<>();
+        for (Messages message : messages) {
+            if (senderId.equals(message.getSender_id().getUser_id()) && receiverId.equals(message.getReceiver_id().getUser_id())) {
+                filteredMessages.add(message);
+            }
+        }
+    
+        return filteredMessages.stream()
+                .map(this::entityToResponse)
+                .collect(Collectors.toList());
+    }
+
+    private boolean isEmpty(String str) {
+        return str == null || str.isEmpty();
     }
 
     private MessagesResp entityToResponse(Messages entity) {
